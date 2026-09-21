@@ -1,0 +1,60 @@
+import torch
+
+if torch.cuda.is_available():
+    device = "cuda"       # NVIDIA GPU
+    dtype = torch.float16
+elif torch.backends.mps.is_available():
+    device = "mps"        # Apple Silicon GPU
+    dtype = torch.float16
+else:
+    device = "cpu"
+    dtype = torch.float32
+
+load_options = {
+    "torch_dtype": dtype,
+}
+
+if device != "cpu":
+    load_options["variant"] = "fp16"
+
+print("Using:", device, dtype)
+
+from diffusers import StableDiffusionPipeline
+
+pipe = StableDiffusionPipeline.from_pretrained(
+    "stabilityai/sd-turbo", # It's Stable Diffusion 2.1, it requires num_inference_steps=1, guidance_scale=0.0
+    **load_options,
+).to(device)
+
+# prompt = (
+#    "Max Ernst surrealist collage, Victorian wood engraving. "
+#  "Exhausted office sleeps with head on her folded arms on office desk."
+#  "beach with ocean and palm trees in her head. "
+#  "Invoices,letters, bills, tax stamps stack behind her. "
+#)
+
+prompt = (
+    "surrealist found-image collage, symbolic juxtaposition, child's face and child head "
+    "collaged onto a frail elderly body, standing in a Victorian parlor, mismatched scale, "
+    "uncanny innocence and mortality, visible cut-paper join, antique magazine fragments, "
+    "nineteenth-century engraving, monochrome ink, aged cream paper, cross-hatching, "
+    "dream logic, dark humor"
+)
+
+
+
+negative_prompt = (
+     "blurry, lowres, watermark, text, deformed faces, extra limbs, "
+    "bad anatomy, extra fingers, cartoon, oversaturated, modern"
+)
+
+image = pipe(
+    prompt=prompt,
+    negative_prompt=negative_prompt,
+    generator=torch.Generator(device).manual_seed(830), # change the seed!
+    num_inference_steps=1, guidance_scale=0.0,
+    height=512,
+    width=512,
+).images[0]
+
+image
