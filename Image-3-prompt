@@ -1,0 +1,23 @@
+prompt = (
+    "Happy worker leaving office, modern street view, tall buildings behind the worker, "
+    "walking into golden sunset afternoon, gardens on the roadside,"
+    "tidy road, clouds in the blue sky,"
+    "surrealist found-image collage, symbolic juxtaposition, cut vintage photographs,"
+    "uncanny scale, seamless photomontage, warm colors, high contrast"
+)
+
+negative_prompt = (
+     "blurry, lowres, watermark, text, deformed faces, covered face, extra limbs, "
+    "bad anatomy, extra fingers, cartoon, oversaturated, modern"
+)
+
+image = pipe(
+    prompt=prompt,
+    negative_prompt=negative_prompt,
+    generator=torch.Generator(device).manual_seed(258), # change the seed!
+    num_inference_steps=1, guidance_scale=0.0,
+    height=512,
+    width=512,
+).images[0]
+
+image
