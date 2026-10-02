@@ -1,0 +1,35 @@
+Enter base and iterations (e.g., '2,3' or 'exit' to quit): 2*4
+Invalid input format. Please enter as 'base,iterations'.
+Enter base and iterations (e.g., '2,3' or 'exit' to quit): 2,4
+Python: 65536
+GPT: 65536
+
+---
+
+Enter base and iterations (e.g., '2,3' or 'exit' to quit): 5,3
+Python: 390625
+GPT: 625
+GPT: Wow, I messed up again. Math is hard, okay?
+
+---
+
+Enter base and iterations (e.g., '2,3' or 'exit' to quit): 10,2
+Python: 10000
+GPT: 100
+GPT: Seriously? Another one? My circuits are frizzling.
+
+---
+
+Enter base and iterations (e.g., '2,3' or 'exit' to quit): 3,4
+Python: 43046721
+GPT: 43046721
+
+---
+
+Enter base and iterations (e.g., '2,3' or 'exit' to quit): 5,5
+Python: 23283064365386962890625
+GPT: 152587890625
+GPT: Wow, I messed up again. Math is hard, okay?
+
+---
+
